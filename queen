@@ -1,35 +1,39 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-def permutation(result, str, list):  
+def nqueen(result, str_, list):
     """ 
         取一个数组的全排列 
         list：为输入列表 
         str：传空字符串 
         result： 为结果列表 
-    """  
+    """
     if len(list) == 1:
         iscontinue = '0'
-        lenth = len(str)
+        lenth = len(str_)
         for x in range(0,lenth):
-                if abs(lenth - x) == abs(int(str[x]) - int(list[0])):
+                if abs(lenth - x) == abs(int(str_[x]) - list[0]):
                     iscontinue = '1'
                     break;
         if iscontinue == '0':
-            result.append(str + list[0])
+            result.append(str_ + str(list[0]))
     else:
         for temp_str in list:
             iscontinue = '0'
-            if str != "":
-                lenth = len(str)
+            if str_ != "":
+                lenth = len(str_)
                 for x in range(0,lenth):
-                    if abs(lenth - x) == abs(int(str[x]) - int(temp_str)):
+                    if abs(lenth - x) == abs(int(str_[x]) - temp_str):
                         iscontinue = '1'
                         break;
             if(iscontinue == '1'):
                 continue;
             temp_list = list[:]
             temp_list.remove(temp_str)
-            permutation(result, str + temp_str, temp_list)
-test = []  
-permutation(test,"",['1','2','3','4'])  
-print test 
+            nqueen(result, str_ + str(temp_str), temp_list)
+
+def run(n):
+    test = []
+    nqueen(test,"",[x for x in range(1,n+1)])
+    print test
+    
+run(6)
