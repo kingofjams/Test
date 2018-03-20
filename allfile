@@ -1,0 +1,18 @@
+<?php
+$dir = '/tmp';
+$result = array();
+function read_file($dir){
+	foreach(scandir($dir) as $item){
+		if($item == '.' || $item == '..'){
+			continue;
+		}
+		$path = $dir . DIRECTORY_SEPARATOR . $item;
+		if(is_dir($path)){
+			$result['dir'][] = read_file($path);
+		}else{
+			$result['file'][] = $path;
+		}
+	}
+	return $result;
+}
+print_r(read_file($dir));
